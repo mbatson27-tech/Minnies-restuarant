@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-pXbrz5Ij557T2eG/LSxhZcS1DfuOyJKgCGeqpDHCWK4='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src data:; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Minnie's Beach Cafe | Holmes Beach, Anna Maria Island</title>
 <meta name="description" content="Breakfast and lunch on Anna Maria Island since 2004. Omelets, home-made biscuits and gravy, and pies baked in house. 5360 Gulf Dr, Holmes Beach.">
 <meta name="theme-color" content="#1f5f63">
@@ -448,6 +450,36 @@ footer .row>div:first-child a{display:inline-block;min-height:44px;padding:8px 0
 /* v10: allergen line clearly smaller and quieter than the item name and description (Millen's request) */
 body .cols dd.contains{font-size:.66rem;letter-spacing:.08em;margin-top:3px;opacity:.85;line-height:1.35}
 body .cols dd.contains::before{width:5px;height:5px;border-width:1px;margin:0 6px 1px 0}
+/* v11 fix: long "Closed. Opens tomorrow" status could push the phone number off small screens */
+@media (max-width:860px){.topstrip .tstatus{white-space:normal;min-width:0;flex:1;line-height:1.25}.topstrip .grow{display:none}}
+/* v11: signature plates, visit band, star ratings */
+.sigs{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.sig{display:flex;flex-direction:column;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:0 22px 40px -30px rgba(0,0,0,.45);transition:transform .35s var(--ease-out),box-shadow .35s var(--ease-out)}
+.sig:hover{transform:translateY(-4px);box-shadow:0 30px 50px -30px rgba(0,0,0,.5)}
+.sig-ph{display:block;aspect-ratio:4/3;overflow:hidden;background:var(--surface)}
+.sig-ph img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease-out)}
+.sig:hover .sig-ph img{transform:scale(1.05)}
+.sig-body{padding:22px 24px 24px;display:flex;flex-direction:column;flex:1}
+.sig-body h3{font-size:1.35rem;margin-bottom:8px}
+.sig-body p{color:var(--muted);font-size:.98rem;line-height:1.55;margin:0 0 14px}
+.sig-meta{margin-top:auto!important;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.sig .price{font-weight:700;color:var(--brand);font-size:1.05rem}
+.sig .contains{font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);opacity:.9}
+@media (max-width:900px){.sigs{grid-template-columns:1fr;gap:22px}.sig{display:grid;grid-template-columns:42% 1fr}.sig-ph{aspect-ratio:auto;min-height:100%}.sig-body{padding:16px 16px 18px}.sig-body h3{font-size:1.12rem}.sig-body p{font-size:.9rem;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}}
+.stars{position:relative;display:block;width:86px;height:16px;margin:8px 0 4px;font-size:16px;line-height:16px;letter-spacing:2px}
+.stars::before{content:"\2605\2605\2605\2605\2605";opacity:.28}
+.stars>span{position:absolute;inset:0 auto 0 0;overflow:hidden;white-space:nowrap;color:#f2c14e}
+.stars>span::before{content:"\2605\2605\2605\2605\2605"}
+.readrev{margin-top:28px}
+.visitband{background:var(--surface);border-top:1px solid var(--line);padding:72px 0}
+.vb{display:flex;justify-content:space-between;align-items:center;gap:40px;flex-wrap:wrap}
+.vb h2{margin-bottom:14px}
+.vb-status{display:inline-flex;align-items:center;gap:10px;font-weight:600;margin:0 0 6px}
+.vb-status .dot{width:10px;height:10px}
+.vb-status.open .dot{background:#2e8b57;animation:pulse 2.2s infinite}.vb-status.closed .dot{background:#b5483a}
+.vb-addr{color:var(--muted);margin:0}
+.vb-cta{display:flex;gap:12px;flex-wrap:wrap}
+@media (max-width:760px){.visitband{padding:56px 0}.vb-cta{width:100%}.vb-cta .btn{flex:1 1 100%}}
 /* ===== Theme: Coastal Postcard (Minnie's Beach Cafe) =====
    UI/UX Pro Max: "Vintage Analog" style (faded cream, muted teal, warm coral, polaroid frames, light film grain)
    with Gloock display / Instrument Sans body / Instrument Serif accents. */
@@ -537,6 +569,14 @@ body .cols dd.contains::before{width:5px;height:5px;border-width:1px;margin:0 6p
 .t-postcard .reviews .eyebrow{color:var(--sun)}
 .hero.pc{padding-bottom:110px}
 
+.t-postcard .sig{border:0;padding:10px 10px 0;background:#fff;border-radius:3px}.t-postcard .sig:nth-child(odd){rotate:-.8deg}.t-postcard .sig:nth-child(even){rotate:.8deg}
+.t-postcard .sig-body h3{font-family:var(--display);font-weight:400}.t-postcard .sig .price{color:var(--accent)}
+.t-postcard .visitband{background:var(--brand);color:var(--brand-ink);border:0}.t-postcard .visitband .eyebrow{color:var(--sun)}.t-postcard .vb-addr{color:rgba(253,247,234,.8)}
+.t-postcard .visitband .btn{background:var(--sun);border-color:var(--sun);color:#13323a}.t-postcard .visitband .btn.ghost{background:transparent;color:var(--brand-ink);border-color:rgba(253,247,234,.6)}
+/* visit band on sand so it doesn't merge with the teal reviews block */
+.t-postcard .visitband{background:var(--surface);color:var(--ink);border-top:0}.t-postcard .visitband .eyebrow{color:var(--accent)}.t-postcard .vb-addr{color:var(--muted)}
+.t-postcard .visitband .btn{background:var(--brand);border-color:var(--brand);color:var(--brand-ink)}.t-postcard .visitband .btn.ghost{background:transparent;color:var(--ink);border-color:color-mix(in srgb,var(--ink) 35%,transparent)}
+
 .about .ph{aspect-ratio:1/1;max-width:460px;justify-self:center}.hero.full .ph.cover img{object-position:50% 30%}h1,h2{font-variation-settings:'SOFT' 50}
 </style>
 </head>
@@ -567,17 +607,20 @@ body .cols dd.contains::before{width:5px;height:5px;border-width:1px;margin:0 6p
 </div></section>
 
 <section class="strip"><div class="wrap">
-  <div class="shead"><div><p class="eyebrow">From the kitchen</p><h2>A taste of what's cooking.</h2></div><a class="more" href="#gallery" data-go="gallery">See all photos</a></div>
-  <div class="film"><a class="fph" href="#gallery" data-go="gallery" data-g="0"><img alt=""><span></span></a><a class="fph" href="#gallery" data-go="gallery" data-g="2"><img alt=""><span></span></a><a class="fph" href="#gallery" data-go="gallery" data-g="3"><img alt=""><span></span></a><a class="fph" href="#gallery" data-go="gallery" data-g="4"><img alt=""><span></span></a></div>
+  <div class="shead"><div><p class="eyebrow">From the kitchen</p><h2>Baked right here.</h2></div><a class="more" href="#menu" data-go="menu">See the full menu</a></div>
+  <div class="sigs"><article class="sig"><a class="sig-ph" href="#menu" data-go="menu" aria-label="Pie on the menu"><img data-copy=".gallery .ph:nth-child(1) img" alt="A lattice-top berry pie in front of the Minnie&#x27;s Beach Cafe menu board"></a><div class="sig-body"><h3>Pie</h3><p>A lattice-top berry pie in front of the Minnie&#x27;s Beach Cafe menu board.</p><p class="sig-meta"></p></div></article><article class="sig"><a class="sig-ph" href="#menu" data-go="menu" aria-label="Cupcakes on the menu"><img data-copy=".gallery .ph:nth-child(2) img" alt="Cupcakes on the counter in the dining room"></a><div class="sig-body"><h3>Cupcakes</h3><p>Cupcakes on the counter in the dining room.</p><p class="sig-meta"></p></div></article><article class="sig"><a class="sig-ph" href="#menu" data-go="menu" aria-label="Baked goods on the menu"><img data-copy=".gallery .ph:nth-child(5) img" alt="Trays of home-made cookies and bars"></a><div class="sig-body"><h3>Baked goods</h3><p>Trays of home-made cookies and bars.</p><p class="sig-meta"></p></div></article></div>
 </div></section>
 
 <section class="block reviews"><div class="wrap grid">
   <div><p class="eyebrow">Reviews</p><h2>Loved by locals and visitors.</h2>
-    <div class="score"><div><b data-count="4.6">4.6</b><span>595 Google reviews</span></div><div><b data-count="4.4">4.4</b><span>486 Tripadvisor reviews</span></div></div>
-    <p style="margin-top:28px"><a href="https://www.google.com/maps/search/?api=1&query=Minnie%27s+Beach+Cafe%2C+5360+Gulf+Dr%2C+Holmes+Beach%2C+FL+34217" target="_blank" rel="noopener">Read the reviews on Google</a></p></div>
+    <div class="score"><div><b data-count="4.6">4.6</b><span class="stars" role="img" aria-label="4.6 out of 5 stars"><span style="width:92%"></span></span><span>595 Google reviews</span></div><div><b data-count="4.4">4.4</b><span class="stars" role="img" aria-label="4.4 out of 5 stars"><span style="width:88%"></span></span><span>486 Tripadvisor reviews</span></div></div>
+    <p class="readrev"><a href="https://www.google.com/maps/search/?api=1&query=Minnie%27s+Beach+Cafe%2C+5360+Gulf+Dr%2C+Holmes+Beach%2C+FL+34217" target="_blank" rel="noopener">Read the reviews on Google</a></p></div>
   <div><p class="eyebrow">Guests mention</p><ul><li>Omelets cooked to order</li><li>Home-made biscuits and gravy</li><li>French toast and Belgian waffles</li><li>Staff who remember you</li><li>Big portions, fair prices</li></ul></div>
 </div></section>
-<div class="next"><div class="wrap"><a class="btn" href="#menu" data-go="menu">See the menu</a><a class="btn ghost" href="#contact" data-go="contact">Hours &amp; location</a></div></div>
+<section class="visitband"><div class="wrap vb"><div><p class="eyebrow">Come on in</p><h2>Find us in S&amp;S Plaza.</h2>
+  <p class="vb-status" id="vbstatus"><i class="dot"></i><span>See today's hours</span></p><p class="vb-addr">5360 Gulf Dr (S&amp;S Plaza), Holmes Beach, FL 34217</p></div>
+  <div class="vb-cta"><a class="btn" href="tel:+19417784140">Call (941) 778-4140</a><a class="btn ghost" href="https://www.google.com/maps/dir/?api=1&destination=Minnie%27s+Beach+Cafe%2C+5360+Gulf+Dr%2C+Holmes+Beach%2C+FL+34217" target="_blank" rel="noopener">Get directions</a></div>
+</div></section>
 </div>
 
 <div class="view" data-view="menu" hidden>
@@ -588,7 +631,7 @@ body .cols dd.contains::before{width:5px;height:5px;border-width:1px;margin:0 6p
   <div class="cols"><div class="panel" role="tabpanel" data-i="0"><h3>Breakfast</h3><dl><div class="item"><dt><b>Two eggs, any style</b><u></u><i>7.95</i></dt><dd>Cooked to order with home fries, hash browns, grits, fruit or sliced tomato, and white, wheat, marble rye or sourdough toast. One egg 7.25.</dd><dd class=contains>Contains egg, wheat</dd></div><div class="item"><dt><b>Eggs with breakfast meat</b><u></u><i>9.95</i></dt><dd>Two eggs, a side and toast with bacon, sausage patty or links, or turkey links.</dd><dd class=contains>Contains egg, wheat</dd></div><div class="item"><dt><b>The Big Easy</b><u></u><i>15.95</i></dt><dd>Two eggs, home fries or hash browns, a sausage patty and a link, a slice of bacon, a home-made biscuit with sausage gravy, grits and toast.</dd><dd class=contains>Contains egg, wheat, milk, pork</dd></div><div class="item"><dt><b>Corned beef hash</b><u></u><i>12.95</i></dt><dd>Corned beef hash with two eggs, a breakfast side and toast.</dd><dd class=contains>Contains egg, wheat</dd></div><div class="item"><dt><b>Ham steak</b><u></u><i>14.95</i></dt><dd>A full ham steak with two eggs, a breakfast side and toast. Half steak 12.95.</dd><dd class=contains>Contains egg, wheat, pork</dd></div><div class="item"><dt><b>Biscuits and sausage gravy</b><u></u><i>6.95</i></dt><dd>Biscuits baked here under pork sausage gravy. One biscuit and a cup 6.95, two and a bowl 7.95.</dd><dd class=contains>Contains wheat, milk, pork</dd></div><div class="item"><dt><b>Minnie&#x27;s fresh fruit boat</b><u></u><i>8.95</i></dt><dd>Fresh-cut fruit.</dd></div></dl></div><div class="panel" role="tabpanel" data-i="1" hidden><h3>Egg sandwiches</h3><dl><div class="item"><dt><b>Sand Dollar</b><u></u><i>4.95</i></dt><dd>One egg and cheese on an English muffin. With bacon, sausage or ham 6.95.</dd><dd class=contains>Contains egg, wheat, milk</dd></div><div class="item"><dt><b>Monster Sand Dollar</b><u></u><i>5.95</i></dt><dd>Two eggs and cheese on a sandwich-size English muffin. With bacon, sausage or ham 7.95.</dd><dd class=contains>Contains egg, wheat, milk</dd></div><div class="item"><dt><b>Western Sand Dollar</b><u></u><i>9.75</i></dt><dd>Two eggs with ham, bell pepper, onion and cheese on a sandwich-size English muffin.</dd><dd class=contains>Contains egg, wheat, milk, pork</dd></div><div class="item"><dt><b>Bagels and muffins</b><u></u><i>3.95</i></dt><dd>Assorted bagels with cream cheese, and muffins.</dd><dd class=contains>Contains wheat, milk</dd></div></dl></div><div class="panel" role="tabpanel" data-i="2" hidden><h3>Lunch</h3><dl><div class="item"><dt><b>Minnie&#x27;s Beach Burger</b><u></u><i>11.95</i></dt><dd>Our burger with your choice of side. Add cheese 12.50.</dd><dd class=contains>Contains wheat</dd></div><div class="item"><dt><b>Patty melt</b><u></u><i>12.50</i></dt><dd>A six-ounce burger topped with grilled chopped onion and Swiss on marble rye.</dd><dd class=contains>Contains wheat, milk</dd></div><div class="item"><dt><b>Minnie&#x27;s Monster Club</b><u></u><i>14.95</i></dt><dd>Triple decker of bacon, lettuce, tomato, turkey, ham, cheese and mayo.</dd><dd class=contains>Contains wheat, milk, egg, pork</dd></div><div class="item"><dt><b>Turkey or ham club</b><u></u><i>13.95</i></dt><dd>Triple decker of bacon, lettuce, tomato, turkey or ham, and mayo.</dd><dd class=contains>Contains wheat, egg, pork</dd></div><div class="item"><dt><b>Reuben</b><u></u><i>13.95</i></dt><dd>Corned beef or turkey, grilled on marble rye.</dd><dd class=contains>Contains wheat, milk</dd></div><div class="item"><dt><b>Steak hoagie or chicken Philly</b><u></u><i>15.95</i></dt><dd>With mushroom, pepper, onion and Swiss.</dd><dd class=contains>Contains wheat, milk</dd></div><div class="item"><dt><b>Grilled chicken breast</b><u></u><i>13.95</i></dt><dd>Served on a deli roll. With cheese 14.50.</dd><dd class=contains>Contains wheat</dd></div><div class="item"><dt><b>Real roast turkey sandwich</b><u></u><i>11.95</i></dt><dd>Boar&#x27;s Head turkey on St. Armand&#x27;s Bakery bread, with lettuce, tomato, onion and mayo on request.</dd><dd class=contains>Contains wheat</dd></div><div class="item"><dt><b>White tuna or chicken salad sandwich</b><u></u><i>10.95</i></dt><dd>With lettuce, tomato, onion and mayo on request.</dd><dd class=contains>Contains wheat, egg, fish (tuna)</dd></div><div class="item"><dt><b>Bacon, lettuce and tomato</b><u></u><i>10.25</i></dt><dd class=contains>Contains wheat, pork</dd></div><div class="item"><dt><b>Grilled cheese</b><u></u><i>7.95</i></dt><dd>With bacon and tomato 10.25.</dd><dd class=contains>Contains wheat, milk</dd></div></dl></div><div class="panel" role="tabpanel" data-i="3" hidden><h3>Salads and plates</h3><dl><div class="item"><dt><b>The Big Salad</b><u></u><i>10.95</i></dt><dd>Lettuce, tomato, cucumber, chopped bacon and Cheddar. Topped with tuna, chicken or egg salad 13.95.</dd><dd class=contains>Contains milk, pork</dd></div><div class="item"><dt><b>Chef salad</b><u></u><i>14.95</i></dt><dd>Lettuce, tomato, cucumber, egg, turkey, ham, American and Swiss cheese.</dd><dd class=contains>Contains egg, milk, pork</dd></div><div class="item"><dt><b>Minnie&#x27;s Notorious Hot Turkey Platter</b><u></u><i>15.95</i></dt><dd>Fresh sliced turkey, real mashed potato and gravy, cranberry sauce and grilled Texas toast, with tossed salad or cole slaw.</dd><dd class=contains>Contains wheat, milk</dd></div><div class="item"><dt><b>Chicken tenders</b><u></u><i>14.95</i></dt><dd>All white meat, golden brown, with French fries, cole slaw and a dipping sauce.</dd><dd class=contains>Contains wheat</dd></div><div class="item"><dt><b>Soup of the day</b><u></u><i>4.95</i></dt><dd>Cup 4.95, bowl 5.95.</dd></div></dl></div></div>
   <p class="note">Prices may change. See the boards behind the counter for specials, pies and baked goods.</p>
   <p class="note allergy">Allergen notes are a guide. Please tell your server about any allergy.</p>
-  <div class="menu-tools"><a class="btn" href="tel:+19417784140">Call to order</a><button class="btn ghost print" type="button" onclick="window.print()"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10v4H7zM5 9h14a2 2 0 0 1 2 2v6h-4v4H7v-4H3v-6a2 2 0 0 1 2-2zm4 7v3h6v-3zm8-4.5a1 1 0 1 0 0 .01z"/></svg>Print the menu</button></div>
+  <div class="menu-tools"><a class="btn" href="tel:+19417784140">Call to order</a><button class="btn ghost print" type="button" id="printmenu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10v4H7zM5 9h14a2 2 0 0 1 2 2v6h-4v4H7v-4H3v-6a2 2 0 0 1 2-2zm4 7v3h6v-3zm8-4.5a1 1 0 1 0 0 .01z"/></svg>Print the menu</button></div>
 </div></div></section>
 
 <div class="next"><div class="wrap"><a class="btn" href="#contact" data-go="contact">Hours &amp; location</a><a class="btn ghost" href="#gallery" data-go="gallery">See the photos</a></div></div>
@@ -634,7 +677,7 @@ const p=new Intl.DateTimeFormat("en-US",{timeZone:"America/New_York",weekday:"lo
 const g=t=>p.find(x=>x.type===t).value, day=D.indexOf(g("weekday")), now=(+g("hour")%24)*60+ +g("minute");
 const tb=document.querySelector("#hours tbody");
 [1,2,3,4,5,6,0].forEach(i=>{const h=HOURS[i],tr=document.createElement("tr");if(i===day)tr.className="today";
-  tr.innerHTML="<th scope='row'>"+D[i]+"</th><td>"+(h?f(h[0])+" to "+f(h[1]):"Closed")+"</td>";tb.appendChild(tr)});
+  const th=document.createElement("th"),td=document.createElement("td");th.scope="row";th.textContent=D[i];td.textContent=h?f(h[0])+" to "+f(h[1]):"Closed";tr.append(th,td);tb.appendChild(tr)});
 const s=document.getElementById("status"),t=HOURS[day];let txt,cls="closed";
 if(t&&now>=t[0]&&now<t[1]){cls="open";txt="Open now until "+f(t[1])}
 else if(t&&now<t[0]){txt="Opens today at "+f(t[0])}
@@ -676,7 +719,7 @@ if(location.hash.length>1)show(location.hash.slice(1));
   // footer hours, grouped
   const ord=[1,2,3,4,5,6,0],key=i=>HOURS[i]?HOURS[i].join():"x",fh=document.getElementById("fhours");
   for(let a=0;a<7;){let b=a;while(b<6&&key(ord[b+1])===key(ord[a]))b++;const h=HOURS[ord[a]],li=document.createElement("li");
-    li.innerHTML="<span>"+sd(ord[a])+(b>a?" to "+sd(ord[b]):"")+"</span><span>"+(h?f(h[0])+" to "+f(h[1]):"Closed")+"</span>";fh.appendChild(li);a=b+1}
+    const s1=document.createElement("span"),s2=document.createElement("span");s1.textContent=sd(ord[a])+(b>a?" to "+sd(ord[b]):"");s2.textContent=h?f(h[0])+" to "+f(h[1]):"Closed";li.append(s1,s2);fh.appendChild(li);a=b+1}
   // reuse gallery photos for the home strip and page banners (no duplicate image data)
   const gi=[...document.querySelectorAll(".gallery .ph img")],hi=document.querySelector(".hero .ph img");
   document.querySelectorAll(".fph").forEach(a=>{const im=gi[+a.dataset.g];if(!im){a.remove();return}a.firstChild.src=im.src;a.firstChild.alt=im.alt;a.lastChild.textContent=(im.parentNode.dataset.label||"").replace(/^Photo: /,"")});
@@ -688,12 +731,14 @@ if(location.hash.length>1)show(location.hash.slice(1));
   figs.forEach((fg,i)=>{fg.tabIndex=0;fg.setAttribute("role","button");fg.setAttribute("aria-label","Enlarge photo: "+gi[i].alt);fg.addEventListener("click",()=>open(i));fg.addEventListener("keydown",ev=>{if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();open(i)}})});
   lb.querySelector(".x").onclick=close;lb.querySelector(".pv").onclick=()=>open(cur-1);lb.querySelector(".nx").onclick=()=>open(cur+1);
   lb.addEventListener("click",ev=>{if(ev.target===lb)close()});
-  addEventListener("keydown",ev=>{if(lb.hidden)return;if(ev.key==="Escape")close();if(ev.key==="ArrowLeft")open(cur-1);if(ev.key==="ArrowRight")open(cur+1)});
+  addEventListener("keydown",ev=>{if(lb.hidden)return;if(ev.key==="Tab"){const fo=[...lb.querySelectorAll("button")],i=fo.indexOf(document.activeElement);ev.preventDefault();fo[(i+(ev.shiftKey?-1:1)+fo.length)%fo.length].focus();return}if(ev.key==="Escape")close();if(ev.key==="ArrowLeft")open(cur-1);if(ev.key==="ArrowRight")open(cur+1)});
   // swipe between photos on phones (buttons and arrow keys still work)
   let sx=null;li.addEventListener("touchstart",ev=>{sx=ev.touches[0].clientX},{passive:true});
   li.addEventListener("touchend",ev=>{if(sx===null)return;const dx=ev.changedTouches[0].clientX-sx;sx=null;if(Math.abs(dx)>45)open(cur+(dx<0?1:-1))},{passive:true});
   // v7 theme helpers: reuse photos already on the page, print today's date and hours
-  document.querySelectorAll("img[data-copy]").forEach(im=>{const s=document.querySelector(im.dataset.copy);if(s&&s.src)im.src=s.src;else im.closest("figure").remove()});
+  document.querySelectorAll("img[data-copy]").forEach(im=>{const s=document.querySelector(im.dataset.copy);if(s&&s.src)im.src=s.src;else(im.closest("figure,.sig")||im).remove()});
+  const vb=document.getElementById("vbstatus");if(vb){vb.classList.add(cls);vb.lastElementChild.textContent=st}
+  const pm=document.getElementById("printmenu");if(pm)pm.addEventListener("click",()=>print());
   const gd=document.getElementById("gzdate");if(gd)gd.textContent=new Intl.DateTimeFormat("en-US",{timeZone:"America/New_York",weekday:"long",month:"long",day:"numeric",year:"numeric"}).format(new Date());
   const dt=document.getElementById("dntoday");if(dt)dt.textContent=t?f(t[0])+" to "+f(t[1]):"Closed today";
   // back to top
